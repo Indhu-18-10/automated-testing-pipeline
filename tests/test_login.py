@@ -15,7 +15,7 @@ def test_successful_login():
 
         message = driver.find_element(By.ID, "message").text
 
-        assert message == "Login successful"
+        assert message == "This should fail"
 
     finally:
         driver.quit()
