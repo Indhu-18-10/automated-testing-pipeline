@@ -18,13 +18,14 @@ pipeline {
         stage('Run Selenium Tests') {
             steps {
                 bat 'if not exist reports mkdir reports'
-                bat 'python -m pytest tests -v --html=reports/test-report.html --self-contained-html'
+                bat 'python -m pytest tests -v --html=reports/test-report.html --self-contained-html --junitxml=reports/test-results.xml'
             }
         }
     }
 
     post {
         always {
+            junit 'reports/test-results.xml'
             archiveArtifacts artifacts: 'reports/test-report.html', allowEmptyArchive: false
         }
     }
